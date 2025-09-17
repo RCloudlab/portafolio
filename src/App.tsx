@@ -6,29 +6,23 @@ import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
-
-
-import animatedBackground from './assets/images/aztec_animated_background.gif'; 
+import Footer from './components/Footer';
+import Education from './components/Educaition';
 
 function App() {
   return (
     <div className="relative bg-dark-obsidian text-white min-h-screen">
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        {/* <img
-          src={animatedBackground}
-          alt="Animated Aztec Background"
-          className="w-full h-full object-cover opacity-20" 
-        /> */}
-       
+      <div className="fixed inset-0 z-0 overflow-hidden">       
       </div>
-
       <Header />
       <main className="relative z-10"> 
         <Hero />
         <About />
+        <Education />
         <Skills />
         <Experience />
         <Contact />
+        <Footer />
       </main>
     </div>
   );
