@@ -14,7 +14,7 @@ function App() {
       </div>
       <Header />
       <main className="relative z-10"> 
-        <Hero />
+        <Hero /> 
         <About />
         <Education />
         <Skills />
