@@ -56,7 +56,7 @@ const About = () => {
             </h2>
             <div className="space-y-4 text-base md:text-lg text-gray-300 leading-relaxed">
               <p>
-                Soy <strong>Rodrigo Vega Espinoza</strong>, un apasionado desarrollador originario de Zitácuaro, Michoacán. Mi fascinación por la tecnología me impulsa a aprender y mejorar cada día.
+                Soy <strong>Rodrigo Vega Espinoza</strong>, un apasionado desarrollador originario de Maravatío, Michoacán. Mi fascinación por la tecnología me impulsa a aprender y mejorar cada día.
               </p>
               <p>
                 Mi objetivo es claro: <strong>crear, innovar y contribuir al mundo</strong> a través de soluciones de software que dejen una huella positiva y duradera.
