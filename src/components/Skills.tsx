@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   FaReact, FaNodeJs, FaPython, FaJava, FaPhp, FaLaravel, FaGitAlt, FaGithub, FaGitlab, FaFigma, FaDocker, FaJira, FaTrello 

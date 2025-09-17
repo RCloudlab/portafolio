@@ -1,15 +1,10 @@
-// src/components/Experience.tsx
-import React from 'react';
 import { motion } from 'framer-motion';
-
-// Tus imágenes de logos
 import nayalogo from '../assets/images/nayaLogo.png'; 
 import itmLogo from '../assets/images/SIMLogo.png'; 
 import elPrimoLogo from '../assets/images/ElPrimoLogo.png'; 
 import Ticketly from '../assets/images/Ticketly.png'; 
 import MindfulLogo from '../assets/images/MindfulLogo.png'; 
 
-// --- Interfaz y Datos (sin cambios) ---
 interface ExperienceItem {
   title: string;
   company: string;
@@ -62,7 +57,6 @@ const experienceData: ExperienceItem[] = [
   },
 ];
 
-// --- Animaciones (sin cambios) ---
 const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.2 } },
@@ -78,7 +72,6 @@ const techPillVariants = {
     visible: { opacity: 1, y: 0 },
 } as const;
 
-// --- Componente de Tarjeta con Estilo Mejorado ---
 const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
     const techList = item.tech.split(',').map(tech => tech.trim());
 
@@ -103,7 +96,6 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
                 </div>
 
                 <div className="flex flex-col flex-grow">
-                  {/* --- ESTILO DE DESCRIPCIÓN MEJORADO --- */}
                   <motion.p 
                     className="text-base text-gray-200 leading-relaxed flex-grow mb-4 [text-shadow:0_0_10px_rgba(212,163,115,0.3)]"
                     initial={{ opacity: 0 }}

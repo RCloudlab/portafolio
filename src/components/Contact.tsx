@@ -1,10 +1,7 @@
-// src/components/Contact.tsx
-import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
-// --- Datos de Redes Sociales (sin cambios) ---
 const socialLinks = [
   { 
     name: 'LinkedIn', 
@@ -23,7 +20,6 @@ const socialLinks = [
   },
 ];
 
-// --- Animaciones para los Iconos (sin cambios) ---
 const socialContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -45,7 +41,6 @@ const Contact = () => {
       <div className="absolute bottom-0 -left-20 w-64 h-64 md:w-96 md:h-96 bg-aztec-red/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
       <div className="max-w-2xl mx-auto px-4 md:px-6 text-center relative z-10">
-        {/* --- Tarjeta del Formulario --- */}
         <motion.div 
           className="bg-dark-obsidian/50 backdrop-blur-sm border border-aztec-gold/20 rounded-2xl p-6 sm:p-8 md:p-10"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -92,7 +87,7 @@ const Contact = () => {
             O conecta conmigo en mis redes
           </p>
           <motion.div 
-            className="flex justify-center items-center gap-6 sm:gap-8" // Más espacio entre iconos
+            className="flex justify-center items-center gap-6 sm:gap-8" 
             variants={socialContainerVariants}
             initial="hidden"
             whileInView="visible"
@@ -105,9 +100,8 @@ const Contact = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={socialIconVariants}
-                whileHover={{ scale: 1.2, y: -8, color: '#D4A373' }} // Elevación más pronunciada
+                whileHover={{ scale: 1.2, y: -8, color: '#D4A373' }}
                 transition={{ type: 'spring', stiffness: 300 }}
-                // AJUSTE DE TAMAÑO: Iconos mucho más grandes
                 className="text-4xl md:text-5xl text-gray-400 transition-colors"
                 aria-label={link.name}
               >

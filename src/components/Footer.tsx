@@ -1,33 +1,3 @@
-// src/components/Footer.tsx
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
-
-// Reutilizamos los datos de los enlaces sociales para mantener la consistencia
-const socialLinks = [
-  { 
-    name: 'LinkedIn', 
-    icon: <FaLinkedin />, 
-    url: 'https://www.linkedin.com/in/tu-usuario/' // Reemplaza con tu URL
-  },
-  { 
-    name: 'GitHub', 
-    icon: <FaGithub />, 
-    url: 'https://github.com/tu-usuario' // Reemplaza con tu URL
-  },
-  { 
-    name: 'Email', 
-    icon: <MdEmail />, 
-    url: 'mailto:tu-correo@example.com' // Reemplaza con tu correo
-  },
-  { 
-    name: 'WhatsApp', 
-    icon: <FaWhatsapp />, 
-    url: 'https://wa.me/1234567890' // Reemplaza con tu número
-  },
-];
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 

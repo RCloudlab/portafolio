@@ -1,5 +1,5 @@
 // src/components/Header.tsx
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { motion } from 'framer-motion';
 import profilePic from '../assets/images/profile.jpg'
 
@@ -32,8 +32,6 @@ const Header = () => {
             RV Espinoza
           </span>
         </div>
-
-        {/* Menú de escritorio */}
         <ul className="hidden md:flex space-x-8 text-sm">
           {navItems.map((item) => (
             <motion.li
@@ -47,8 +45,6 @@ const Header = () => {
             </motion.li>
           ))}
         </ul>
-
-        {/* Botón de menú para móviles */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-aztec-gold focus:outline-none"
@@ -64,8 +60,6 @@ const Header = () => {
           </svg>
         </button>
       </nav>
-
-      {/* Menú desplegable para móviles */}
       <motion.ul
         initial={false}
         animate={isOpen ? "open" : "closed"}

@@ -1,20 +1,16 @@
-// src/components/About.tsx
-import React from "react";
 import { motion } from "framer-motion";
-
-// Importa tus imágenes. Asegúrate de que las rutas sean correctas.
 import Image1 from "../assets/images/Me1.jpg";
 import Image2 from "../assets/images/Me2.jpg";
 import Image3 from "../assets/images/Me3.jpg";
 import Image4 from "../assets/images/Me4.jpg";
 
-// --- Animaciones ---
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.3, // Anima la columna de imagen y luego la de texto
+      staggerChildren: 0.3, 
       ease: "easeOut",
     },
   },
