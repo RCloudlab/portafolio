@@ -9,7 +9,7 @@ import Education from './components/Educaition';
 
 function App() {
   return (
-    <div className="relative bg-dark-obsidian text-white min-h-screen">
+    <div className="relative bg-dark-obsidian text-white min-h-screen jus">
       <div className="fixed inset-0 z-0 overflow-hidden">       
       </div>
       <Header />
