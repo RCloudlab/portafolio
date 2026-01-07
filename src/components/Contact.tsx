@@ -6,7 +6,7 @@ const socialLinks = [
   { 
     name: 'LinkedIn', 
     icon: <FaLinkedin />, 
-    url: 'https://www.linkedin.com/in/rodrigo-vega-45723b353/' 
+    url: 'https://www.linkedin.com/in/rodrigo-vega-espinoza-45723b353/' 
   },
   { 
     name: 'GitHub', 
