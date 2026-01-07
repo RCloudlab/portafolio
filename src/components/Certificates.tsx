@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FaAward, FaExternalLinkAlt } from "react-icons/fa";
-import certificadoImage from '../assets/images/certificado.png';
+import certificadoImage from '../assets/images/Certificado.png';
 
 const Certificate = () => {
   return (
