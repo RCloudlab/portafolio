@@ -1,9 +1,12 @@
-import { motion } from 'framer-motion';
-import nayalogo from '../assets/images/nayaLogo.png'; 
-import itmLogo from '../assets/images/SIMLogo.png'; 
-import elPrimoLogo from '../assets/images/ElPrimoLogo.png'; 
-import Ticketly from '../assets/images/Ticketly.png'; 
-import MindfulLogo from '../assets/images/MindfulLogo.png'; 
+import { easeOut, motion } from "framer-motion";
+import { FaExternalLinkAlt, FaLaptopCode } from "react-icons/fa";
+
+// Tus imports de imágenes...
+import nayalogo from "../assets/images/nayaLogo.png";
+import itmLogo from "../assets/images/SIMLogo.png";
+import ObradorCortes from "../assets/images/ObradorCortesLogo.png";
+import TaqueriaChaman from "../assets/images/TaqueriaElChaman.png";
+import MindfulLogo from "../assets/images/MindfulLogo.png";
 
 interface ExperienceItem {
   title: string;
@@ -11,139 +14,175 @@ interface ExperienceItem {
   date: string;
   description: string;
   tech: string;
-  image: string; 
+  image: string;
+  link?: string;
 }
 
 const experienceData: ExperienceItem[] = [
-    {
-    title: 'Nayá',
-    company: 'Nayá Corporativo',
-    date: '2025 - Presente',
-    description: 'Una aplicación para que los niños aprendan a identificar, comprender y gestionar emociones.',
-    tech: "React Native, Python, PostgreSQL, AWS",
+  {
+    title: "Nayá",
+    company: "Nayá Corporativo",
+    date: "2025 - Presente",
+    description:
+      "Aplicación Movil para el aprendizaje de lagestión de las emociones para niños.",
+    tech: "React Native, Python, AWS",
     image: nayalogo,
+    link: "https://naya-website.vercel.app/",
   },
   {
-    title: 'SIM',
-    company: 'Instituto Tecnológico de Morelia',
-    date: '2024 - 2025',
-    description: 'Sistema de Integracion Modular, una plataforma web para la gestión académica y administrativa.',
-    tech: "Laravel, PHP, MySQL, Tailwindcss, GitLab",
+    title: "SIM",
+    company: "Tecnológico de Morelia",
+    date: "2024 - 2025",
+    description: "Plataforma de gestión académica integral.",
+    tech: "Laravel, PHP, MySQL",
     image: itmLogo,
+    link: "https://sim.morelia.tecnm.mx/",
   },
   {
-    title: 'TicketLy',
-    company: 'Proyecto Personal',
-    date: '2025',
-    description: 'Plataforma de gestión de proyectos y tareas para equipos ágiles.',
-    tech: "React, PostgreSQL, Docker, Figma",
-    image: Ticketly,
+    title: "Taqueria El Chaman",
+    company: "Sitio Web",
+    date: "2025",
+    description: "Web corporativa y menú digital.",
+    tech: "React, Tailwind, Figma",
+    image: TaqueriaChaman,
+    link: "https://taqueriaselchaman.vercel.app/",
   },
   {
-    title: 'El Primo ',
-    company: 'ElPrimoJoxe',
-    date: '2025 - Presente',
-    description: 'Sitio Web para una cafetería local, con menú interactivo y publicidad de eventos.',
-    tech: "React, tailwindcss, Figma, MySQL",
-    image: elPrimoLogo,
+    title: "Obrador Cortes",
+    company: "Industrializadora Michoacana",
+    date: "2025",
+    description: "Catálogo de productos cárnicos y contacto.",
+    tech: "React, Tailwind",
+    image: ObradorCortes,
+    link: "https://obradorcortes.vercel.app/",
   },
   {
-    title: 'MindFulTOC',
-    company: 'CodeServe',
-    date: '2024 (Pausado)',
-    description: 'Aplicación móvil para ayudar a personas con Trastorno Obsesivo Compulsivo (TOC).',
-    tech: "React Native, tailwindcss, Figma, MySQL",
+    title: "MindFulTOC",
+    company: "CodeServe",
+    date: "2024",
+    description: "App móvil de apoyo para tratamiento de TOC.",
+    tech: "React Native, MySQL",
     image: MindfulLogo,
   },
 ];
 
 const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.2, delayChildren: 0.2 } },
-} as const;
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-} as const;
-  
-const techPillVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: { opacity: 1, y: 0 },
-} as const;
-
-const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
-    const techList = item.tech.split(',').map(tech => tech.trim());
-
-    return (
-        <motion.div 
-            className="group h-full"
-            variants={cardVariants}
-            whileHover={{ y: -8, transition: { type: 'spring', stiffness: 300 } }}
-        >
-            <div className="flex flex-col h-full bg-dark-obsidian/50 backdrop-blur-sm rounded-xl overflow-hidden border border-aztec-gold/20 p-6 transition-all duration-300 group-hover:border-aztec-gold/50 group-hover:shadow-2xl group-hover:shadow-aztec-gold/10">
-                
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={item.image}
-                    alt={`Logo de ${item.company}`}
-                    className="w-20 h-20 rounded-full border-2 border-aztec-gold/50 object-contain p-1 bg-dark-obsidian transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div>
-                    <h3 className="text-2xl font-bold text-aztec-gold">{item.title}</h3>
-                    <p className="text-sm font-semibold text-gray-300">{item.company} &bull; {item.date}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col flex-grow">
-                  <motion.p 
-                    className="text-base text-gray-200 leading-relaxed flex-grow mb-4 [text-shadow:0_0_10px_rgba(212,163,115,0.3)]"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.5, duration: 0.8 }}
-                    viewport={{ once: true }}
-                  >
-                    {item.description}
-                  </motion.p>
-                  
-                  <motion.div 
-                      className="flex flex-wrap gap-2"
-                      initial="hidden"
-                      whileInView="visible"
-                      variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
-                      viewport={{ once: true, amount: 0.8 }}
-                  >
-                      {techList.map((tech) => (
-                        <motion.span 
-                          key={tech}
-                          variants={techPillVariants}
-                          className="text-sm font-medium text-cyan-300 bg-cyan-400/10 px-3 py-1 rounded-full border border-cyan-400/30"
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                  </motion.div>
-                </div>
-            </div>
-        </motion.div>
-    );
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
+};
+
+const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
+  const techList = item.tech.split(",").map((tech) => tech.trim());
+
+  return (
+    <motion.div
+      className="group relative flex flex-col h-full bg-dark-obsidian rounded-xl border border-aztec-gold/20 overflow-hidden hover:border-aztec-gold/60 transition-all duration-300 hover:shadow-2xl hover:shadow-aztec-gold/10 hover:-translate-y-2"
+      variants={cardVariants}
+    >
+      <div className="h-48 w-full relative overflow-hidden bg-gradient-to-br from-gray-800 to-black">
+        <div className="absolute inset-0 bg-aztec-gold/5 z-10" />
+
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-obsidian via-transparent to-transparent opacity-90" />
+        <div className="absolute top-4 right-4 z-20">
+          <span className="bg-black/60 backdrop-blur-md text-aztec-gold text-xs font-bold px-3 py-1 rounded-full border border-aztec-gold/30">
+            {item.date}
+          </span>
+        </div>
+      </div>
+
+      {/* 2. SECCIÓN DE CONTENIDO */}
+      <div className="p-6 flex flex-col flex-grow relative z-20 -mt-6">
+        {/* Título y Compañía */}
+        <div className="mb-4">
+          <h3 className="text-xl font-bold text-white group-hover:text-aztec-gold transition-colors truncate">
+            {item.title}
+          </h3>
+          <p className="text-sm text-aztec-gold/80 font-medium">
+            {item.company}
+          </p>
+        </div>
+
+        {/* Descripción */}
+        <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
+          {item.description}
+        </p>
+
+        {/* Tecnologías */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {techList.map((tech, i) => (
+            <span
+              key={i}
+              className="text-xs text-cyan-200 bg-cyan-900/30 px-2 py-1 rounded border border-cyan-500/20"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Botón (Solo si hay link) */}
+        {item.link ? (
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full mt-auto flex items-center justify-center gap-2 py-3 rounded-lg bg-aztec-gold/10 border border-aztec-gold/30 text-aztec-gold font-semibold text-sm hover:bg-aztec-gold hover:text-dark-obsidian transition-all duration-300 group/btn"
+          >
+            Ver Proyecto
+            <FaExternalLinkAlt className="text-xs transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+          </a>
+        ) : (
+          <div className="w-full py-3 text-center text-gray-600 text-sm italic border border-transparent">
+            En desarrollo / Confidencial
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 md:py-28 bg-dark-obsidian text-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-aztec text-aztec-gold mb-16 text-center">
+    <section id="experience" className="py-20 bg-dark-obsidian text-gray-200">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }} // Duración de la aparición
+          className="inline-flex items-center justify-center p-3 bg-aztec-gold/10 rounded-full mb-4"
+        >
+          {/* 2. Contenedor INTERNO: Se encarga de flotar infinitamente */}
+          <motion.div
+            animate={{ y: [0, -8, 0] }} // Se mueve 0px -> sube 8px -> vuelve a 0px
+            transition={{
+              duration: 2, // Tarda 2 segundos en completar el ciclo
+              repeat: Infinity, // Se repite para siempre
+              ease: "easeInOut", // Movimiento suave (no robótico)
+            }}
+          >
+            <FaLaptopCode className="text-2xl text-aztec-gold" />
+          </motion.div>
+        </motion.div>
+        <h2 className="text-4xl md:text-5xl font-bold font-aztec text-aztec-gold mb-12 text-center">
           Experiencia Profesional
         </h2>
-        
-        <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
         >
           {experienceData.map((item, index) => (
             <ExperienceCard key={index} item={item} />
