@@ -1,4 +1,24 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-brand-white transition-colors duration-300;
+  }
+  
+  .dark body {
+    @apply bg-brand-neon text-brand-dark;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-brand-white antialiased;
+  }
+  ::selection {
+    @apply bg-brand-neon text-brand-dark;
+  }
+}
+/* Ocultar cursor nativo si queremos usar el personalizado luego */
+/* .custom-cursor-active { cursor: none; } */

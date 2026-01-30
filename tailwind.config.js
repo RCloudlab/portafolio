@@ -1,23 +1,24 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-   theme: {
+  theme: {
     extend: {
       colors: {
-        'aztec-gold': '#D4A373',
-        'aztec-red': '#C0392B',
-        'aztec-brown': '#8D6E63',
-        'dark-obsidian': '#2C3E50',
+        brand: {
+          dark: '#050505',    // Fondo total
+          surface: '#0F1115', // Tarjetas / Bento
+          neon: '#10B981',    // Verde esmeralda (Acento)
+          electric: '#0070F3',// Azul (Detalles)
+          muted: '#94A3B8',   // Texto secundario
+          white: '#FFFFFF',
+        },
       },
       fontFamily: {
-        aztec: ['"Nombre de tu fuente azteca"', 'serif'],
-      },
-      backgroundImage: {
-        'aztec-pattern': "url('./src/assets/images/aztec_pattern.jpg')",
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'monospace'],
       },
     },
   },

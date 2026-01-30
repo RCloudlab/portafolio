@@ -1,51 +1,105 @@
-import { motion } from 'framer-motion';
-import profilePic from '../assets/images/profile.jpg';
+import { motion, useScroll, useTransform } from "framer-motion";
+import profilePic from "../assets/images/profile.jpg";
+import { Terminal, ChevronRight } from "lucide-react";
 
 const Hero = () => {
-  return (
-    <section className="relative h-screen flex items-center justify-center text-center bg-dark-obsidian">
-      <div className="absolute inset-0 bg-black opacity-60"></div>
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
 
-      <div className="relative z-10 p-4 md:p-8 flex flex-col items-center">
+  return (
+    <section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-black pt-28 md:pt-24">
+      <motion.div
+        style={{ y: y1 }}
+        className="absolute top-20 -right-20 w-96 h-96 bg-brand-electric/10 rounded-full blur-[100px] pointer-events-none"
+      />
+      <div className="relative z-10 container mx-auto px-6 flex flex-col items-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6 md:mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 flex items-center gap-2 px-4 py-2 rounded-full bg-brand-neon/10 border border-brand-neon/20 text-brand-neon font-mono text-sm shadow-sm"
         >
-          <motion.img
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-neon opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-neon"></span>
+          </span>
+          Disponible para nuevos proyectos
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 100 }}
+          className="relative mb-8"
+        >
+          <div className="absolute inset-0 bg-brand-electric rounded-2xl rotate-6 blur-sm opacity-20"></div>
+          <img
             src={profilePic}
-            alt="Tu Foto de Perfil"
-            className="w-44 h-44 sm:w-52 sm:h-52 md:w-56 md:h-56 rounded-full border-4 border-aztec-gold shadow-lg object-cover"
-            whileHover={{ scale: 1.1, rotate: 360 }}
+            alt="Rodrigo Vega"
+            className="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl object-cover border-2 border-brand-negro  transition-all duration-500 shadow-2xl"
           />
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-aztec text-aztec-gold drop-shadow-lg"
-        >
-          ¡Hola! Soy <strong>Rodrigo Vega Espinoza</strong>
-        </motion.h1>
+        <div className="text-center">
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-brand-electric font-mono text-lg mb-2"
+          >
+            &lt; Rodrigo Vega Espinoza /&gt;
+          </motion.h2>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-5xl md:text-8xl font-black text-brand-white leading-tight tracking-tighter"
+          >
+            DEVS THAT <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-electric to-brand-neon">
+              EMPOWER
+            </span>{" "}
+            IDEAS.
+          </motion.h1>
+        </div>
+
         <motion.p
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="mt-4 text-base sm:text-lg md:text-xl text-gray-200 drop-shadow-md max-w-2xl mx-auto"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="mt-6 text-lg md:text-xl text-brand-muted max-w-xl text-center font-light leading-relaxed"
         >
-          Estudiante de Ing. Sistemas Computacionales
-          <br /><br />
-          Desarrollador Apasionado
+          Ingeniero en Sistemas enfocado en construir experiencias digitales
+          escalables con
+          <span className="text-brand-negO font-semibold">
+            {" "}
+            React Native, FastAPI y Supabase.
+          </span>
         </motion.p>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="mt-8 px-6 py-3 md:px-8 md:py-4 rounded-lg font-bold text-lg bg-aztec-red text-white shadow-xl transform transition-all duration-300 hover:bg-aztec-gold focus:outline-none focus:ring-4 focus:ring-aztec-gold"
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-10 flex flex-col sm:flex-row gap-4"
         >
-          <a href="#contact">Contáctame</a>
-        </motion.button>
+          <a
+            href="#experience"
+            className="group flex items-center gap-2 bg-brand-neon text-brand-dark px-8 py-4 rounded-xl font-bold hover:bg-brand-electric transition-all shadow-lg active:scale-95"
+          >
+            Ver Proyectos
+            <ChevronRight
+              size={20}
+              className="group-hover:translate-x-1 transition-transform"
+            />
+          </a>
+
+          <a
+            href="#contact"
+            className="flex items-center gap-2 border-2 border-brand-negro px-8 py-4 rounded-xl font-bold hover:bg-brand-neon hover:text-brand-dark transition-all active:scale-95"
+          >
+            <Terminal size={20} />
+            Hablemos
+          </a>
+        </motion.div>
       </div>
     </section>
   );

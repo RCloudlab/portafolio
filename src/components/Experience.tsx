@@ -1,150 +1,157 @@
-import { easeOut, motion } from "framer-motion";
-import { FaExternalLinkAlt, FaLaptopCode } from "react-icons/fa";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { FaLock } from "react-icons/fa";
+import { ChevronRight, Layers } from "lucide-react";
+import React from 'react';
 
-// Tus imports de imágenes...
 import nayalogo from "../assets/images/nayaLogo.png";
 import itmLogo from "../assets/images/SIMLogo.png";
 import ObradorCortes from "../assets/images/ObradorCortesLogo.png";
 import TaqueriaChaman from "../assets/images/TaqueriaElChaman.png";
 import MindfulLogo from "../assets/images/MindfulLogo.png";
 
-interface ExperienceItem {
-  title: string;
-  company: string;
-  date: string;
-  description: string;
-  tech: string;
-  image: string;
-  link?: string;
-}
-
-const experienceData: ExperienceItem[] = [
+const experienceData = [
   {
     title: "Nayá",
     company: "Nayá Corporativo",
     date: "2025 - Presente",
     description:
-      "Aplicación Movil para el aprendizaje de lagestión de las emociones para niños.",
-    tech: "React Native, Python, AWS",
+      "Liderazgo técnico en el desarrollo de una aplicación móvil enfocada en gestión emocional infantil, con arquitectura escalable y enfoque en experiencia de usuario y mantenibilidad.",
+    tech: ["React Native", "Python", "AWS"],
     image: nayalogo,
     link: "https://naya-website.vercel.app/",
+    type: "EdTech / Social Impact"
+  },
+  {
+    title: "Obrador Cortés",
+    company: "Industrializadora Michoacana",
+    date: "2025",
+    description:
+      "Desarrollo de plataforma web corporativa orientada a presentación de catálogo, optimización de rendimiento y conversión comercial.",
+    tech: ["React", "Tailwind", "Vercel"],
+    image: ObradorCortes,
+    link: "https://obradorcortes.vercel.app/",
+    type: "Corporate Web"
   },
   {
     title: "SIM",
-    company: "Tecnológico de Morelia",
+    company: "Tecnológico Nacional de México",
     date: "2024 - 2025",
-    description: "Plataforma de gestión académica integral.",
-    tech: "Laravel, PHP, MySQL",
+    description:
+      "Modernización de sistema institucional para gestión académica, optimizando tiempos de respuesta, estructura de datos y estabilidad operativa.",
+    tech: ["Laravel", "PHP", "MySQL"],
     image: itmLogo,
     link: "https://sim.morelia.tecnm.mx/",
+    type: "Institutional System"
   },
   {
-    title: "Taqueria El Chaman",
-    company: "Sitio Web",
+    title: "Taquería El Chamán",
+    company: "Proyecto Comercial",
     date: "2025",
-    description: "Web corporativa y menú digital.",
-    tech: "React, Tailwind, Figma",
+    description:
+      "Implementación de presencia digital optimizada para dispositivos móviles, enfocada en experiencia de usuario y captación de clientes.",
+    tech: ["React", "Figma", "Tailwind"],
     image: TaqueriaChaman,
     link: "https://taqueriaselchaman.vercel.app/",
-  },
-  {
-    title: "Obrador Cortes",
-    company: "Industrializadora Michoacana",
-    date: "2025",
-    description: "Catálogo de productos cárnicos y contacto.",
-    tech: "React, Tailwind",
-    image: ObradorCortes,
-    link: "https://obradorcortes.vercel.app/",
+    type: "Commercial Landing"
   },
   {
     title: "MindFulTOC",
     company: "CodeServe",
     date: "2024",
-    description: "App móvil de apoyo para tratamiento de TOC.",
-    tech: "React Native, MySQL",
+    description:
+      "Diseño de arquitectura móvil orientada a soporte terapéutico, priorizando accesibilidad, seguridad de información y estructura escalable.",
+    tech: ["React Native", "MySQL", "Node.js"],
     image: MindfulLogo,
+    type: "HealthTech"
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProjectCard = ({ item, index }: { item: any; index: number }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: easeOut } },
-};
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
 
-const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
-  const techList = item.tech.split(",").map((tech) => tech.trim());
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+
+  const glowX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const glowY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left) / rect.width - 0.5);
+    y.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
 
   return (
     <motion.div
-      className="group relative flex flex-col h-full bg-dark-obsidian rounded-xl border border-aztec-gold/20 overflow-hidden hover:border-aztec-gold/60 transition-all duration-300 hover:shadow-2xl hover:shadow-aztec-gold/10 hover:-translate-y-2"
-      variants={cardVariants}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.7, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => { x.set(0); y.set(0); }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: "1000px" }}
+      className="group relative bg-brand-surface rounded-[2.5rem] p-6 sm:p-8 flex flex-col md:flex-row gap-8 border border-brand-neon/20 hover:border-brand-electric/40 transition-colors"
     >
-      <div className="h-48 w-full relative overflow-hidden bg-gradient-to-br from-gray-800 to-black">
-        <div className="absolute inset-0 bg-aztec-gold/5 z-10" />
+      {/* Glow */}
+      <motion.div
+        style={{
+          background: `radial-gradient(circle at ${glowX} ${glowY}, rgba(0,71,171,0.15), transparent 70%)`,
+        }}
+        className="absolute inset-0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+      />
 
-        <img
-          src={item.image}
-          alt={item.title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-obsidian via-transparent to-transparent opacity-90" />
-        <div className="absolute top-4 right-4 z-20">
-          <span className="bg-black/60 backdrop-blur-md text-aztec-gold text-xs font-bold px-3 py-1 rounded-full border border-aztec-gold/30">
-            {item.date}
-          </span>
-        </div>
+      {/* Image */}
+      <div
+        className="w-full md:w-56 h-48 sm:h-56 rounded-[2rem] overflow-hidden shrink-0 bg-brand-dark"
+        style={{ transform: "translateZ(60px)" }}
+      >
+        <img src={item.image} alt={item.title} className="w-full h-full object-contain bg-white" />
       </div>
 
-      {/* 2. SECCIÓN DE CONTENIDO */}
-      <div className="p-6 flex flex-col flex-grow relative z-20 -mt-6">
-        {/* Título y Compañía */}
-        <div className="mb-4">
-          <h3 className="text-xl font-bold text-white group-hover:text-aztec-gold transition-colors truncate">
+      {/* Content */}
+      <div className="flex flex-col justify-between flex-grow" style={{ transform: "translateZ(40px)" }}>
+        <div>
+          <span className="text-[10px] font-bold text-brand-electric uppercase tracking-widest bg-brand-electric/10 px-3 py-1 rounded-full">
+            {item.type}
+          </span>
+
+          <h4 className="text-2xl sm:text-3xl font-black text-brand-white mt-4 mb-1">
             {item.title}
-          </h3>
-          <p className="text-sm text-aztec-gold/80 font-medium">
+          </h4>
+
+          <p className="text-brand-electric/50 text-[10px] font-bold uppercase tracking-widest mb-4">
             {item.company}
+          </p>
+
+          <p className="text-brand-muted text-sm leading-relaxed font-light">
+            {item.description}
           </p>
         </div>
 
-        {/* Descripción */}
-        <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-grow line-clamp-3">
-          {item.description}
-        </p>
-
-        {/* Tecnologías */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {techList.map((tech, i) => (
-            <span
-              key={i}
-              className="text-xs text-cyan-200 bg-cyan-900/30 px-2 py-1 rounded border border-cyan-500/20"
-            >
-              {tech}
+        <div className="flex flex-wrap gap-2 mt-6">
+          {item.tech.map((t: string, i: number) => (
+            <span key={i} className="text-[10px] font-bold text-brand-white/50 border border-brand-negro/10 px-3 py-1 rounded-full bg-brand-dark/50">
+              {t}
             </span>
           ))}
         </div>
 
-        {/* Botón (Solo si hay link) */}
-        {item.link ? (
-          <a
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full mt-auto flex items-center justify-center gap-2 py-3 rounded-lg bg-aztec-gold/10 border border-aztec-gold/30 text-aztec-gold font-semibold text-sm hover:bg-aztec-gold hover:text-dark-obsidian transition-all duration-300 group/btn"
-          >
-            Ver Proyecto
-            <FaExternalLinkAlt className="text-xs transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
-          </a>
-        ) : (
-          <div className="w-full py-3 text-center text-gray-600 text-sm italic border border-transparent">
-            En desarrollo / Confidencial
-          </div>
-        )}
+        <div className="mt-6">
+          {item.link ? (
+            <a href={item.link} target="_blank" className="inline-flex items-center gap-2 text-brand-white text-xs font-black hover:text-brand-electric">
+              VER PROYECTO <ChevronRight size={16} />
+            </a>
+          ) : (
+            <span className="flex items-center gap-2 text-brand-white/30 text-[10px] font-bold italic">
+              <FaLock size={10} /> PROYECTO CONFIDENCIAL
+            </span>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -152,42 +159,25 @@ const ExperienceCard = ({ item }: { item: ExperienceItem }) => {
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-20 bg-dark-obsidian text-gray-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }} // Duración de la aparición
-          className="inline-flex items-center justify-center p-3 bg-aztec-gold/10 rounded-full mb-4"
-        >
-          {/* 2. Contenedor INTERNO: Se encarga de flotar infinitamente */}
-          <motion.div
-            animate={{ y: [0, -8, 0] }} // Se mueve 0px -> sube 8px -> vuelve a 0px
-            transition={{
-              duration: 2, // Tarda 2 segundos en completar el ciclo
-              repeat: Infinity, // Se repite para siempre
-              ease: "easeInOut", // Movimiento suave (no robótico)
-            }}
-          >
-            <FaLaptopCode className="text-2xl text-aztec-gold" />
-          </motion.div>
-        </motion.div>
-        <h2 className="text-4xl md:text-5xl font-bold font-aztec text-aztec-gold mb-12 text-center">
-          Experiencia Profesional
-        </h2>
+    <section id="experience" className="py-20 md:py-24 overflow-visible">
+      <div className="container mx-auto px-4 sm:px-6">
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
+        <div className="mb-16 max-w-xl">
+          <motion.div className="w-fit bg-brand-electric/10 p-3 rounded-2xl mb-6 text-brand-electric">
+            <Layers size={24} />
+          </motion.div>
+
+          <h3 className="text-4xl sm:text-5xl md:text-7xl font-black text-brand-white tracking-tighter uppercase leading-none">
+            Experiencia <br />
+            <span className="text-brand-electric italic font-light">Profesional</span>
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 overflow-visible">
           {experienceData.map((item, index) => (
-            <ExperienceCard key={index} item={item} />
+            <ProjectCard key={index} item={item} index={index} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

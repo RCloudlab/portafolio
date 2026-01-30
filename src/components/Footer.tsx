@@ -1,20 +1,15 @@
 const Footer = () => {
-  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark-obsidian border-t border-aztec-gold/20 text-gray-400">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col items-center gap-6">
-          <div className="text-center text-sm">
-            <p>&copy; {currentYear} Rodrigo Vega Espinoza. Todos los derechos reservados.</p>
-            <p className="text-xs text-gray-500 mt-1">
-              Forjado con React y Tailwind CSS
-            </p>
-          </div>
-
-        </div>
-      </div>
-    </footer>
+    <footer className="py-12  border-t border-brand-neon/20 text-center">
+    <p className="text-brand-white/40 text-xs font-mono uppercase tracking-widest">
+      © 2026 — Diseñado y codificado por Rodrigo Vega Espinoza
+    </p>
+    <div className="mt-4 flex justify-center gap-6 text-brand-white/20">
+      <span className="text-[10px]">React + Vite + Tailwind</span>
+      <span className="text-[10px]">Framer Motion</span>
+    </div>
+  </footer>
   );
 };
 

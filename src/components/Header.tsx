@@ -1,87 +1,120 @@
-// src/components/Header.tsx
-import  { useState } from 'react';
-import { motion } from 'framer-motion';
-import profilePic from '../assets/images/profile.jpg'
-
-const navItems = [
-  { name: 'Acerca de mí', href: '#about' },
-  { name: 'Habilidades', href: '#skills' },
-  { name: 'Experiencia', href: '#experience' },
-  { name: 'Contacto', href: '#contact' },
-];
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Terminal, Github, Linkedin } from 'lucide-react';
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Inicio', href: '#' },
+    { name: 'Sobre mí', href: '#about' },
+    { name: 'Tecnologías', href: '#skills' },
+    { name: 'Proyectos', href: '#experience' },
+    { name: 'Contacto', href: '#contact' },
+  ];
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 120 }}
-      className="fixed top-0 left-0 right-0 z-50 p-4 bg-dark-obsidian bg-opacity-80 backdrop-blur-sm shadow-lg"
+    <nav 
+      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
+        isScrolled ? 'py-4' : 'py-8'
+      }`}
     >
-      <nav className="flex items-center justify-between max-w-6xl mx-auto">
-        <div className="flex items-center space-x-4">
-          <motion.img
-            src={profilePic}
-            alt="Tu Foto"
-            className="w-10 h-10 rounded-full border-2 border-aztec-gold"
-            whileHover={{ scale: 1.1, rotate: 360 }}
-          />
-          <span className="hidden md:block text-xl font-bold font-aztec text-aztec-gold">
-            RV Espinoza
-          </span>
-        </div>
-        <ul className="hidden md:flex space-x-8 text-sm">
-          {navItems.map((item) => (
-            <motion.li
-              key={item.name}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <a href={item.href} className="text-gray-300 hover:text-aztec-gold transition-colors duration-300">
-                {item.name}
+      <div className="container mx-auto px-6">
+        <div className={`relative flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-500 ${
+          isScrolled 
+            ? 'bg-brand-surface/70 backdrop-blur-xl border border-brand-neon/20 shadow-lg' 
+            : 'bg-transparent border border-transparent'
+        }`}>
+          
+          {/* Logo */}
+          <motion.a 
+            href="#" 
+            className="flex items-center gap-2 group"
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="bg-brand-electric p-2 rounded-lg text-white">
+              <Terminal size={20} />
+            </div>
+            <span className="font-black text-brand-white tracking-tighter text-xl group-hover:text-brand-electric transition-colors">
+              RVE<span className="text-brand-electric">.</span>
+            </span>
+          </motion.a>
+
+          <div className="hidden md:flex items-center gap-8">
+            <ul className="flex gap-8">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a 
+                    href={link.href} 
+                    className="text-xs font-bold uppercase tracking-widest text-brand-white/60 hover:text-brand-electric transition-colors relative group"
+                  >
+                    {link.name}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-electric transition-all duration-300 group-hover:w-full" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+            
+            <div className="h-6 w-px bg-brand-neon/10 mx-2" />
+            
+            {/* Social Icons */}
+            <div className="flex gap-4">
+              <a href="https://github.com/RCloudlab" target="_blank" className="text-brand-white/40 hover:text-brand-white transition-colors">
+                <Github size={18} />
               </a>
-            </motion.li>
-          ))}
-        </ul>
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-aztec-gold focus:outline-none"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
+              <a href="https://www.linkedin.com/in/rodrigo-vega-espinoza-45723b353/" target="_blank" className="text-brand-white/40 hover:text-brand-electric transition-colors">
+                <Linkedin size={18} />
+              </a>
+            </div>
+          </div>
+
+          <button 
+            className="md:hidden text-brand-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-      </nav>
-      <motion.ul
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: { opacity: 1, height: "auto", marginTop: "1rem" },
-          closed: { opacity: 0, height: 0, marginTop: "0rem" },
-        }}
-        className="md:hidden flex flex-col items-center space-y-4 pt-4 overflow-hidden"
-      >
-        {navItems.map((item) => (
-          <motion.li
-            key={item.name}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="absolute top-full left-0 w-full p-6 md:hidden"
           >
-            <a href={item.href} onClick={() => setIsOpen(false)} className="text-gray-300 hover:text-aztec-gold transition-colors duration-300">
-              {item.name}
-            </a>
-          </motion.li>
-        ))}
-      </motion.ul>
-    </motion.header>
+            <div className="bg-brand-surface rounded-3xl shadow-2xl border border-brand-neon/20 p-8 flex flex-col gap-6">
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-2xl font-black text-brand-white hover:text-brand-electric transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
+              <hr className="border-brand-neon/20" />
+              <div className="flex gap-6 justify-center">
+                <Github size={24} className="text-brand-white/40" />
+                <Linkedin size={24} className="text-brand-white/40" />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 
