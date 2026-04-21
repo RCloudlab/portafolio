@@ -7,7 +7,7 @@ import nayalogo from "../assets/images/nayaLogo.png";
 import itmLogo from "../assets/images/SIMLogo.png";
 import ObradorCortes from "../assets/images/ObradorCortesLogo.png";
 import TaqueriaChaman from "../assets/images/TaqueriaElChaman.png";
-import sonderLogo from "../assets/images/SonderLogo.png";
+import sonderLogo from "../assets/images/sonderLogo.png";
 
 const experienceData = [
   {

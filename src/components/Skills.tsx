@@ -2,9 +2,6 @@ import { motion } from "framer-motion";
 import { 
   FaReact, FaGitAlt, FaFigma, FaDocker 
 } from "react-icons/fa";
-import { 
-  SiTypescript, SiTailwindcss, SiFastapi, SiSupabase 
-} from "react-icons/si";
 import { Code2, Database, Layout } from "lucide-react";
 
 const Skills = () => {
@@ -37,6 +34,7 @@ const Skills = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[180px]">
 
+          {/* Frontend & Mobile — card grande */}
           <motion.div 
             whileHover={{ y: -6 }}
             className="md:col-span-2 lg:col-span-3 lg:row-span-2 
@@ -47,12 +45,12 @@ const Skills = () => {
               <Layout className="mb-4 opacity-50" size={32} />
 
               <h4 className="text-xl sm:text-2xl font-bold mb-2">
-                Frontend & Mobile
+                Frontend &amp; Mobile
               </h4>
 
               <p className="text-white/80 font-light text-sm sm:text-base">
-                Desarrollo de interfaces robustas, accesibles y consistentes,
-                alineadas a estándares de producto y experiencia de usuario.
+                Interfaces modernas con React y React Native, sitios optimizados
+                con WordPress y estilos profesionales con CSS/Tailwind.
               </p>
 
               <p className="text-xs text-white/60 mt-3 font-mono">
@@ -63,21 +61,21 @@ const Skills = () => {
             <div className="flex flex-wrap gap-3 relative z-10 mt-6">
               <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm">
                 <FaReact className="inline mr-2" />
+                React
+              </span>
+              <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm">
+                <FaReact className="inline mr-2" />
                 React Native
               </span>
               <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm">
-                <SiTypescript className="inline mr-2" />
-                TypeScript
-              </span>
-              <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm">
-                <SiTailwindcss className="inline mr-2" />
-                Tailwind CSS
+                🌐 WordPress
               </span>
             </div>
 
             <FaReact className="absolute -bottom-12 -right-12 text-[200px] sm:text-[220px] text-white/5 rotate-12" />
           </motion.div>
 
+          {/* Backend & DBs */}
           <motion.div 
             whileHover={{ y: -6 }}
             className="md:col-span-2 lg:col-span-3 
@@ -87,32 +85,31 @@ const Skills = () => {
             <div>
               <Database className="mb-4 opacity-70" size={28} />
               <h4 className="text-lg sm:text-xl font-bold">
-                Backend & Cloud
+                Backend &amp; Bases de Datos
               </h4>
 
               <p className="text-white/70 text-sm mt-3">
-                Servicios backend diseñados para entornos empresariales:
-                seguridad, control de accesos, escalabilidad y consistencia de datos.
+                APIs y sistemas robustos con Laravel y .NET (C#), persistencia
+                confiable con PostgreSQL y SQL.
               </p>
             </div>
 
-            <div className="flex gap-3 mt-6">
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <SiFastapi />
-              </div>
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <SiSupabase />
-              </div>
+            <div className="flex gap-3 mt-6 flex-wrap">
+              <span className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-mono">Laravel / PHP</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-mono">.NET (C#)</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-mono">PostgreSQL</span>
+              <span className="px-3 py-1.5 rounded-full bg-white/10 text-xs font-mono">SQL</span>
             </div>
           </motion.div>
 
+          {/* Git */}
           <motion.div 
             whileHover={{ y: -4 }}
             className="md:col-span-1 lg:col-span-2 
               bg-brand-surface border border-brand-neon/20 
               rounded-3xl p-6 flex items-center gap-4"
           >
-            <div className="bg-orange-100 text-orange-600 p-3 rounded-2xl">
+            <div className="bg-orange-100 text-orange-600 p-3 rounded-2xl shrink-0">
               <FaGitAlt size={24} />
             </div>
             <div>
@@ -120,18 +117,19 @@ const Skills = () => {
                 Control de versiones
               </p>
               <p className="text-xs text-brand-white/50">
-                Flujos colaborativos y buenas prácticas
+                Git · Flujos colaborativos y buenas prácticas
               </p>
             </div>
           </motion.div>
 
+          {/* Figma / UI */}
           <motion.div 
             whileHover={{ y: -4 }}
             className="md:col-span-1 lg:col-span-2 
               bg-brand-surface border border-brand-neon/20 
               rounded-3xl p-6 flex items-center gap-4"
           >
-            <div className="bg-purple-100 text-purple-600 p-3 rounded-2xl">
+            <div className="bg-purple-100 text-purple-600 p-3 rounded-2xl shrink-0">
               <FaFigma size={24} />
             </div>
             <div>
@@ -144,6 +142,7 @@ const Skills = () => {
             </div>
           </motion.div>
 
+          {/* Docker */}
           <motion.div 
             whileHover={{ y: -4 }}
             className="md:col-span-2 lg:col-span-2 
@@ -157,7 +156,7 @@ const Skills = () => {
               </span>
             </div>
             <p className="text-xs text-brand-neon/70">
-              Entornos controlados, reproducibles y listos para producción.
+              Docker · Entornos controlados, reproducibles y listos para producción.
             </p>
           </motion.div>
         </div>
@@ -167,10 +166,10 @@ const Skills = () => {
             Tecnologías complementarias
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["Kotlin", "Java", "PHP", "Laravel", "PostgreSQL", "Trello", "OBS"].map(skill => (
+            {["Java", "PHP", "SQL", "PostgreSQL", "Trello", "Git", "Docker"].map(skill => (
               <span 
                 key={skill} 
-                className="px-4 py-1 rounded-full border border-brand-negro text-xs font-mono text-brand-white/70"
+                className="px-4 py-1 rounded-full border border-brand-white/10 text-xs font-mono text-brand-white/70 bg-brand-white/5"
               >
                 {skill}
               </span>
