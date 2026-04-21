@@ -1,19 +1,30 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FaLock } from "react-icons/fa";
-import { ChevronRight, Layers } from "lucide-react";
+import { ChevronRight, Layers, CalendarDays } from "lucide-react";
 import React from 'react';
 
 import nayalogo from "../assets/images/nayaLogo.png";
 import itmLogo from "../assets/images/SIMLogo.png";
 import ObradorCortes from "../assets/images/ObradorCortesLogo.png";
 import TaqueriaChaman from "../assets/images/TaqueriaElChaman.png";
-import MindfulLogo from "../assets/images/MindfulLogo.png";
+import sonderLogo from "../assets/images/SonderLogo.png";
 
 const experienceData = [
   {
+    title: "Desarrollador Web Full-Stack",
+    company: "Sonder Marketing",
+    date: "2026 – Actual",
+    isCurrent: true,
+    description:
+      "Desarrollo de sitios web optimizados e integración de flujos de automatización complejos, eliminando tareas manuales y mejorando la gestión del ciclo de vida del cliente.",
+    tech: ["WordPress", "CSS", "Automatizaciones (Low Code)"],
+    image: sonderLogo,
+    type: "Digital Marketing Agency"
+  },
+  {
     title: "Nayá",
     company: "Nayá Corporativo",
-    date: "2025 - Presente",
+    date: "2025",
     description:
       "Liderazgo técnico en el desarrollo de una aplicación móvil enfocada en gestión emocional infantil, con arquitectura escalable y enfoque en experiencia de usuario y mantenibilidad.",
     tech: ["React Native", "Python", "AWS"],
@@ -29,19 +40,8 @@ const experienceData = [
       "Desarrollo de plataforma web corporativa orientada a presentación de catálogo, optimización de rendimiento y conversión comercial.",
     tech: ["React", "Tailwind", "Vercel"],
     image: ObradorCortes,
-    link: "https://obradorcortes.vercel.app/",
+    link: "https://carnitascortes.com/",
     type: "Corporate Web"
-  },
-  {
-    title: "SIM",
-    company: "Tecnológico Nacional de México",
-    date: "2024 - 2025",
-    description:
-      "Modernización de sistema institucional para gestión académica, optimizando tiempos de respuesta, estructura de datos y estabilidad operativa.",
-    tech: ["Laravel", "PHP", "MySQL"],
-    image: itmLogo,
-    link: "https://sim.morelia.tecnm.mx/",
-    type: "Institutional System"
   },
   {
     title: "Taquería El Chamán",
@@ -55,14 +55,15 @@ const experienceData = [
     type: "Commercial Landing"
   },
   {
-    title: "MindFulTOC",
-    company: "CodeServe",
-    date: "2024",
+    title: "Desarrollador Full-Stack",
+    company: "Tecnológico Nacional de México",
+    date: "2024 – 2025",
     description:
-      "Diseño de arquitectura móvil orientada a soporte terapéutico, priorizando accesibilidad, seguridad de información y estructura escalable.",
-    tech: ["React Native", "MySQL", "Node.js"],
-    image: MindfulLogo,
-    type: "HealthTech"
+      "Modernización de sistema institucional para gestión académica, optimizando tiempos de respuesta, estructura de datos y estabilidad operativa.",
+    tech: ["Laravel", "PHP", "MySQL"],
+    image: itmLogo,
+    link: "https://sim.morelia.tecnm.mx/",
+    type: "Institutional System"
   },
 ];
 
@@ -116,17 +117,37 @@ const ProjectCard = ({ item, index }: { item: any; index: number }) => {
       {/* Content */}
       <div className="flex flex-col justify-between flex-grow" style={{ transform: "translateZ(40px)" }}>
         <div>
-          <span className="text-[10px] font-bold text-brand-electric uppercase tracking-widest bg-brand-electric/10 px-3 py-1 rounded-full">
-            {item.type}
-          </span>
+          {/* Type badge + ACTUAL badge row */}
+          <div className="flex items-center gap-2 flex-wrap mb-4">
+            <span className="text-[10px] font-bold text-brand-electric uppercase tracking-widest bg-brand-electric/10 px-3 py-1 rounded-full">
+              {item.type}
+            </span>
+            {item.isCurrent && (
+              <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 uppercase tracking-widest bg-emerald-400/10 border border-emerald-400/30 px-3 py-1 rounded-full">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                </span>
+                Actual
+              </span>
+            )}
+          </div>
 
-          <h4 className="text-2xl sm:text-3xl font-black text-brand-white mt-4 mb-1">
+          <h4 className="text-2xl sm:text-3xl font-black text-brand-white mb-1">
             {item.title}
           </h4>
 
-          <p className="text-brand-electric/50 text-[10px] font-bold uppercase tracking-widest mb-4">
+          <p className="text-brand-electric/50 text-[10px] font-bold uppercase tracking-widest mb-2">
             {item.company}
           </p>
+
+          {/* Date row */}
+          <div className="flex items-center gap-1.5 mb-4">
+            <CalendarDays size={12} className="text-brand-white/30 shrink-0" />
+            <span className="text-brand-white/40 text-[11px] font-medium tracking-wide">
+              {item.date}
+            </span>
+          </div>
 
           <p className="text-brand-muted text-sm leading-relaxed font-light">
             {item.description}
@@ -135,7 +156,7 @@ const ProjectCard = ({ item, index }: { item: any; index: number }) => {
 
         <div className="flex flex-wrap gap-2 mt-6">
           {item.tech.map((t: string, i: number) => (
-            <span key={i} className="text-[10px] font-bold text-brand-white/50 border border-brand-negro/10 px-3 py-1 rounded-full bg-brand-dark/50">
+            <span key={i} className="text-[10px] font-bold text-brand-white/60 border border-brand-white/10 px-3 py-1 rounded-full bg-brand-white/5 backdrop-blur-sm">
               {t}
             </span>
           ))}
@@ -143,7 +164,7 @@ const ProjectCard = ({ item, index }: { item: any; index: number }) => {
 
         <div className="mt-6">
           {item.link ? (
-            <a href={item.link} target="_blank" className="inline-flex items-center gap-2 text-brand-white text-xs font-black hover:text-brand-electric">
+            <a href={item.link} target="_blank" className="inline-flex items-center gap-2 text-brand-white text-xs font-black hover:text-brand-electric transition-colors">
               VER PROYECTO <ChevronRight size={16} />
             </a>
           ) : (
